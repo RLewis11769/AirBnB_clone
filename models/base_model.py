@@ -2,6 +2,7 @@
 
 """ Module for BaseModel class """
 
+
 from uuid import uuid4
 from datetime import datetime
 
@@ -9,11 +10,19 @@ from datetime import datetime
 class BaseModel:
     """ Methods and attributes of BaseModel class """
 
-    def __init__(self):
+    def __init__(self, *args, **kwargs):
         """ Instantiates attributes """
-        self.id = str(uuid4())
-        self.created_at = datetime.now()
-        self.updated_at = datetime.now()
+        if kwargs and len(kwargs):
+            for key in kwargs.keys():
+                if key != "__class__":
+                    if key == "created_at" or key == "updated_at":
+                        setattr(self, key, datetime.strptime(kwargs[key], "%Y-%m-%dT%H:%M:%S.%f"))
+                    else:
+                        setattr(self, key, kwargs[key])
+        else:
+            self.id = str(uuid4())
+            self.created_at = datetime.now()
+            self.updated_at = datetime.now()
 
     def __str__(self):
         """ Returns string representation of instance """
