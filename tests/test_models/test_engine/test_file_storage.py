@@ -16,6 +16,7 @@ class TestFileStorage(unittest.TestCase):
 
     def test_filepath(self):
         """ Tests for __file_path existance """
+        self.assertTrue(type(fs._FileStorage__file_path) is str)
         tmp = FileStorage()
         try:
             remove("file.json")
@@ -26,7 +27,9 @@ class TestFileStorage(unittest.TestCase):
 
     def test_object(self):
         """ Tests for __objects dictionary existance """
-        self.assertTrue(type(fs.all()) is dict)
+        tmp = FileStorage()
+        self.assertTrue(type(tmp._FileStorage__objects) is dict)
+        self.assertTrue(type(tmp.all()) is dict)
 
     def test_new(self):
         """ Tests for new method """
