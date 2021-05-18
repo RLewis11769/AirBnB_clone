@@ -7,7 +7,7 @@ import cmd
 class HBNBCommand(cmd.Cmd):
     """Command interpreter subclass with class attribute: prompt
     and public instance methods: EOF and quit"""
-    prompt = '(hbnb)'
+    prompt = '(hbnb) '
 
     def do_EOF(self, arg):
         """exits the program"""
