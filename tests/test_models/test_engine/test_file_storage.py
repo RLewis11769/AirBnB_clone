@@ -4,7 +4,7 @@
 
 import unittest
 import json
-from os import path
+from os import path, remove
 from models.engine.file_storage import FileStorage
 from models.base_model import BaseModel
 
@@ -16,6 +16,7 @@ class TestFileStorage(unittest.TestCase):
 
     def test_filepath(self):
         """ Tests for __file_path existance """
+        tmp = FileStorage()
         self.assertTrue(path.exists("file.json"))
 
     def test_object(self):
@@ -30,6 +31,10 @@ class TestFileStorage(unittest.TestCase):
 
     def test_save(self):
         """ Tests for save method """
+        try:
+            remove("file.json")
+        except:
+            pass
         base = BaseModel()
         base.save()
         with open("file.json") as f:
