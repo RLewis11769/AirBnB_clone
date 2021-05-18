@@ -5,7 +5,9 @@
 
 import unittest
 from models.base_model import BaseModel
+from models.engine.file_storage import FileStorage
 from datetime import datetime
+import os
 
 
 MyModel = BaseModel()
@@ -19,6 +21,9 @@ class TestBase(unittest.TestCase):
         orig = MyModel.updated_at
         MyModel.save()
         self.assertFalse(MyModel.updated_at == orig)
+        os.remove("file.json")
+        MyModel.save()
+        self.assertTrue(os.path.exists("file.json"))
 
     def test_to_dict(self):
         """ Test for to_dict method """
