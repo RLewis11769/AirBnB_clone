@@ -33,8 +33,8 @@ class BaseModel:
 
     def save(self):
         """ Updates updated_at when saved """
-        self.updated_at = datetime.now()
         models.storage.save()
+        self.updated_at = datetime.now()
 
     def to_dict(self):
         """ Creates dictionary in json format of attributes """
