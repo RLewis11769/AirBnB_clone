@@ -9,6 +9,10 @@ class HBNBCommand(cmd.Cmd):
     and public instance methods: EOF and quit"""
     prompt = '(hbnb) '
 
+    def emptyline(self):
+        """runs nothing when an empty line is encountered"""
+        pass
+
     def do_EOF(self, arg):
         """exits the program"""
         print()
