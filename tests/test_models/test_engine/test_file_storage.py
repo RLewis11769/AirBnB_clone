@@ -17,6 +17,11 @@ class TestFileStorage(unittest.TestCase):
     def test_filepath(self):
         """ Tests for __file_path existance """
         tmp = FileStorage()
+        try:
+            remove("file.json")
+        except:
+            pass
+        tmp.save()
         self.assertTrue(path.exists("file.json"))
 
     def test_object(self):
