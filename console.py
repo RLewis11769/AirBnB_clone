@@ -137,7 +137,7 @@ class HBNBCommand(cmd.Cmd):
             setattr(val, args[2], atype(args[3][1:-1]))
         except:
             setattr(val, args[2], args[3][1:-1])
-        models.storage.save()
+        val.save()
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
