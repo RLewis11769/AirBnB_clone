@@ -4,8 +4,7 @@
 import cmd
 from models.base_model import BaseModel
 import models
-
-classes = {'BaseModel': BaseModel}
+from models.engine.file_storage import classes
 
 
 class HBNBCommand(cmd.Cmd):

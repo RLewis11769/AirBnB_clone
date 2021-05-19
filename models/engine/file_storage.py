@@ -5,6 +5,9 @@
 
 import json
 from models.base_model import BaseModel
+from models.user import User
+
+classes = {'BaseModel': BaseModel, 'User': User}
 
 
 class FileStorage():
@@ -35,8 +38,9 @@ class FileStorage():
             with open(FileStorage.__file_path) as f:
                 FileStorage.__objects = {}
                 tmp = json.load(f)
-                for key in tmp:
-                    if key[:9] == "BaseModel":
-                        FileStorage.__objects[key] = BaseModel(**tmp[key])
+                for key, val in tmp.items():
+                    for k, v in classes.items():
+                        if key.split('.')[0] == k:
+                            FileStorage.__objects[key] = v(**val)
         except:
             pass
