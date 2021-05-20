@@ -139,5 +139,25 @@ class HBNBCommand(cmd.Cmd):
             setattr(val, args[2], args[3][1:-1])
         val.save()
 
+    def default(self, line):
+        """ Rewriting default """
+        args = line.split(".")
+        dic = models.storage.all().items()
+        for k, v in classes.items():
+            if args[0] == k:
+                if args[1] == "all()":
+                    tmp = "["
+                    flag = 0
+                    for key, val in dic:
+                        if k == key.split(".")[0]:
+                            tmp += str(val) + ", "
+                            flag = 1
+                    if flag == 1:
+                        tmp = tmp[:-2]
+                    print(tmp + "]")
+                    break
+        else:
+            print("*** Unknown syntax:", line)
+
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
