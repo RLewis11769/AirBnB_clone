@@ -156,6 +156,21 @@ class HBNBCommand(cmd.Cmd):
                         tmp = tmp[:-2]
                     print(tmp + "]")
                     break
+                if args[1] == "count()":
+                    tmp = 0
+                    for key, val in dic:
+                        if k == key.split(".")[0]:
+                            tmp += 1
+                    print(tmp)
+                    break
+                if args[1][:5] == "show(":
+                    for key, val in dic:
+                        if k + "." + args[1][6:-2] == key:
+                            print(val)
+                            break
+                    else:
+                        print("** no instance found **")
+                    break
         else:
             print("*** Unknown syntax:", line)
 
