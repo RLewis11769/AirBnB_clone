@@ -2,6 +2,7 @@
 """Module for HBNBCommand class"""
 
 import cmd
+import json
 from models.base_model import BaseModel
 import models
 from models.engine.file_storage import classes
@@ -180,6 +181,32 @@ class HBNBCommand(cmd.Cmd):
                     else:
                         print("** no instance found **")
                     break
+                if args[1][:7] == "update(":
+                    tmp = args[1][7:-1].split(', ', 1)
+                    if tmp[1][0] != '{':
+                        args2 = args[1][7:-1].split(', ')
+                        for key, val in dic.items():
+                            if k + "." + args2[0][1:-1] == key:
+                                j = json.loads(args2[2].replace("'", '"'))
+                                setattr(val, args2[1][1:-1], j)
+                                val.save()
+                                break
+                        else:
+                            print("** no instance found **")
+                        break
+                    else:
+                        args2 = tmp
+                        for key, val in dic.items():
+                            if k + "." + args2[0][1:-1] == key:
+                                j = args2[1].replace("'", '"')
+                                j = json.loads(j)
+                                for jkey, jval in j.items():
+                                    setattr(val, jkey, jval)
+                                    val.save()
+                                break
+                        else:
+                            print("** no instance found **")
+                        break
         else:
             print("*** Unknown syntax:", line)
 
