@@ -142,13 +142,13 @@ class HBNBCommand(cmd.Cmd):
     def default(self, line):
         """ Rewriting default """
         args = line.split(".")
-        dic = models.storage.all().items()
+        dic = models.storage.all()
         for k, v in classes.items():
             if args[0] == k:
                 if args[1] == "all()":
                     tmp = "["
                     flag = 0
-                    for key, val in dic:
+                    for key, val in dic.items():
                         if k == key.split(".")[0]:
                             tmp += str(val) + ", "
                             flag = 1
@@ -158,15 +158,24 @@ class HBNBCommand(cmd.Cmd):
                     break
                 if args[1] == "count()":
                     tmp = 0
-                    for key, val in dic:
+                    for key, val in dic.items():
                         if k == key.split(".")[0]:
                             tmp += 1
                     print(tmp)
                     break
                 if args[1][:5] == "show(":
-                    for key, val in dic:
+                    for key, val in dic.items():
                         if k + "." + args[1][6:-2] == key:
                             print(val)
+                            break
+                    else:
+                        print("** no instance found **")
+                    break
+                if args[1][:8] == "destroy(":
+                    for key, val in dic.items():
+                        if k + "." + args[1][9:-2] == key:
+                            del(dic[key])
+                            models.storage.save()
                             break
                     else:
                         print("** no instance found **")
