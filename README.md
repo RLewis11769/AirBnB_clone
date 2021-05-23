@@ -70,7 +70,7 @@ The program uses several commands that assist in creating, modifying, and deleti
 | all | all or all [class] | Prints all instances of any object. If class name is specified, prints all instances of specified class. |
 | show | show [class] [id] | Prints all existing information about specified instance. |
 | destroy | destroy [class] [id] | Deletes specified instance. Nothing is printed if successful. |
-| update | update [class] [id] [attribute] [information] | Updates specified instance. If the attribute doesn't exist, it is created. If it does exist, the information is replaced. Nothing is printed if successful. |
+| update | update [class] [id] [attribute] "[information]" | Updates specified instance. If the attribute doesn't exist, it is created. If it does exist, the information is replaced. Nothing is printed if successful. |
 
 Some commands call on the class or instance directly:
 
@@ -147,9 +147,10 @@ $ python unittest -m discover tests
 
 ## Bugs
 
-Who knows.
+Console assumes arguments are always in the correct order, commands are separated by proper delimeters (spaces or commas and spaces), and quotes are properly used to surround certain arguments as defined under Usage. Improper usage will result in undefined behavior.
 
 ## Authors
 
 AirJnR was written by Jacob Chavera and Rachel Lewis. See AUTHORS page for more details.
+
 5/23/2021
