@@ -24,13 +24,12 @@ $ git clone https://github.com/RLewis11769/AirBnB_clone
 
 ## Usage
 
-The console is now ready for use in either interactive or non-interactive mode. See below for details.
-
+The console is now ready for use in either interactive or non-interactive mode.
 ### Interactive Mode
 
 In interactive mode, the user can have ongoing interaction with the program. A prompt will be provided that will remain until the user exits from this mode. To learn more about using the console, enter the "help" command.
 
-To enter interactive mode, enter "./console".
+To enter interactive mode, enter "./console.py".
 
 ```
 $ ./console.py
@@ -44,7 +43,7 @@ $
 
 In non-interactive mode, the user can have a one-time interaction with the program.
 
-To use the program in non-interactive mode, "echo" a command in quotes and "pipe" it into the program as seen below.
+To use the program in non-interactive mode, echo a command in quotes and "pipe" it into the program as seen below.
 
 ```
 $ echo "[desired command]" | ./console
@@ -67,7 +66,7 @@ The program uses several commands that assist in creating, modifying, and deleti
 | Command | Usage | Description |
 |:-------:|:-----:|-------------|
 | create | create [class] | Creates a new instance of specified class. Prints id of new instance. |
-| all | all or all [class] | Prints all instances of any object. If class name is specified, prints all instances of specified class. |
+| all | all or all [class] | On its own, prints all instances of any object. If class name is specified, prints all instances of specified class. |
 | show | show [class] [id] | Prints all existing information about specified instance. |
 | destroy | destroy [class] [id] | Deletes specified instance. Nothing is printed if successful. |
 | update | update [class] [id] [attribute] "[information]" | Updates specified instance. If the attribute doesn't exist, it is created. If it does exist, the information is replaced. Nothing is printed if successful. |
@@ -86,7 +85,7 @@ There are two class-based methods to update information, via a string or diction
 | Command | Description |
 |:-------:|-------------|
 | [class].update("[id]", "[attribute]", [information]) | String method to update specified instance. If the attribute doesn't exist, it is created. If it does exist, the information is replaced. Nothing is printed if successful. |
-| [class].update("[id]", [dictionary]) | Dictionary method to update specified instance. Multiple attributes can be updated at once. Each colon-separated attribute must be separated by a comma. If an attribute doesn't exist, it is created. If it does exist, the information is replaced. Nothing is printed if successful. |
+| [class].update("[id]", [dictionary]) | Dictionary method to update specified instance. Multiple attributes can be updated at once. If an attribute doesn't exist, it is created. If it does exist, the information is replaced. Nothing is printed if successful. |
 
 ## Available Classes
 
@@ -137,7 +136,7 @@ Check that the information updated properly:
 
 ## Testing
 
-Unittests are defined for this project to ensure proper implementation. To find details, defined in the [tests](https://github.com/RLewis11769/AirBnB_clone/tree/main/tests) folder.
+Unittests are defined for this project to ensure proper implementation. See the [tests](https://github.com/RLewis11769/AirBnB_clone/tree/main/tests) folder for more details.
 
 To test the project, execute the following command:
 
@@ -147,10 +146,10 @@ $ python unittest -m discover tests
 
 ## Bugs
 
-Console assumes arguments are always in the correct order, commands are separated by proper delimeters (spaces or commas and spaces), and quotes are properly used to surround certain arguments as defined under Usage. Improper usage will result in undefined behavior.
+The console assumes arguments are always in the correct order, commands are separated by proper delimeters (spaces or commas and spaces), and quotes are properly used to surround certain arguments as defined under Usage. Improper usage will result in undefined behavior.
 
 ## Authors
 
-AirJnR was written by Jacob Chavera and Rachel Lewis. See AUTHORS page for more details.
+AirJnR was written by Jacob Chavera and Rachel Lewis. See [AUTHORS](https://github.com/RLewis11769/AirBnB_clone/blob/main/AUTHORS) page for more details.
 
-5/23/2021
+Due 5/24/2021
