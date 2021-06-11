@@ -5,6 +5,15 @@
 
 import json
 from models.base_model import BaseModel
+from models.user import User
+from models.state import State
+from models.city import City
+from models.amenity import Amenity
+from models.place import Place
+from models.review import Review
+
+classes = {'BaseModel': BaseModel, 'User': User, 'State': State, 'City': City,
+           'Amenity': Amenity, 'Place': Place, 'Review': Review}
 
 
 class FileStorage():
@@ -35,8 +44,9 @@ class FileStorage():
             with open(FileStorage.__file_path) as f:
                 FileStorage.__objects = {}
                 tmp = json.load(f)
-                for key in tmp:
-                    if key[:9] == "BaseModel":
-                        FileStorage.__objects[key] = BaseModel(**tmp[key])
+                for key, val in tmp.items():
+                    for k, v in classes.items():
+                        if key.split('.')[0] == k:
+                            FileStorage.__objects[key] = v(**val)
         except:
             pass

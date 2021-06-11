@@ -2,10 +2,10 @@
 """Module for HBNBCommand class"""
 
 import cmd
+import json
 from models.base_model import BaseModel
 import models
-
-classes = {'BaseModel': BaseModel}
+from models.engine.file_storage import classes
 
 
 class HBNBCommand(cmd.Cmd):
@@ -138,6 +138,77 @@ class HBNBCommand(cmd.Cmd):
             setattr(val, args[2], atype(args[3][1:-1]))
         except:
             setattr(val, args[2], args[3][1:-1])
+        val.save()
+
+    def default(self, line):
+        """ Rewriting default """
+        args = line.split(".")
+        dic = models.storage.all()
+        for k, v in classes.items():
+            if args[0] == k:
+                if args[1] == "all()":
+                    tmp = "["
+                    flag = 0
+                    for key, val in dic.items():
+                        if k == key.split(".")[0]:
+                            tmp += str(val) + ", "
+                            flag = 1
+                    if flag == 1:
+                        tmp = tmp[:-2]
+                    print(tmp + "]")
+                    break
+                if args[1] == "count()":
+                    tmp = 0
+                    for key, val in dic.items():
+                        if k == key.split(".")[0]:
+                            tmp += 1
+                    print(tmp)
+                    break
+                if args[1][:5] == "show(":
+                    for key, val in dic.items():
+                        if k + "." + args[1][6:-2] == key:
+                            print(val)
+                            break
+                    else:
+                        print("** no instance found **")
+                    break
+                if args[1][:8] == "destroy(":
+                    for key, val in dic.items():
+                        if k + "." + args[1][9:-2] == key:
+                            del(dic[key])
+                            models.storage.save()
+                            break
+                    else:
+                        print("** no instance found **")
+                    break
+                if args[1][:7] == "update(":
+                    tmp = args[1][7:-1].split(', ', 1)
+                    if tmp[1][0] != '{':
+                        args2 = args[1][7:-1].split(', ')
+                        for key, val in dic.items():
+                            if k + "." + args2[0][1:-1] == key:
+                                j = json.loads(args2[2].replace("'", '"'))
+                                setattr(val, args2[1][1:-1], j)
+                                val.save()
+                                break
+                        else:
+                            print("** no instance found **")
+                        break
+                    else:
+                        args2 = tmp
+                        for key, val in dic.items():
+                            if k + "." + args2[0][1:-1] == key:
+                                j = args2[1].replace("'", '"')
+                                j = json.loads(j)
+                                for jkey, jval in j.items():
+                                    setattr(val, jkey, jval)
+                                    val.save()
+                                break
+                        else:
+                            print("** no instance found **")
+                        break
+        else:
+            print("*** Unknown syntax:", line)
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
